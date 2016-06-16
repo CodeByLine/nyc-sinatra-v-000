@@ -22,18 +22,20 @@ binding.pry
   end
 
   post '/landmarks' do
-    binding.pry
-    @landmark = Landmark.create(params[:landmark]) #(:name => params[:name], :figure_id => params[:figure_id], :year_completed => params[:year_completed])
-  # raise params.inspect
+    # binding.pry
+    # raise params.inspect
+    # params.to_s  => {"landmark"=>"NY", "figure"=>"Some Politician", "year_completed"=>"2016"}
+
+    @landmark = Landmark.find_or_create_by(params[:landmark])
+    redirect "/landmarks/#{@landmark.id}"
+  end
+    # @landmark = Landmark.create(params[:landmark]) #(:name => params[:name], :figure_id => params[:figure_id], :year_completed => params[:year_completed])
+
 # binding.pry
 #       if !params["figure"]["name"].empty?
 #         @landmark.figure << Figure.create(name: params["figure"]["name"])
 #       end
 #       @landmark.save
-
-    redirect "/landmarks/#{@landmark.id}"
-  end
-
 
 
   post '/landmarks/:id' do

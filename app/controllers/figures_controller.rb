@@ -13,6 +13,8 @@ class FiguresController < ApplicationController
 
   post '/figures' do
 
+    # params.to_s  =>  {"figure"=>"Some Politician", "landmark"=>"NY", "year_completed"=>"1955"}
+
     @figure = Figure.create(params[:figure])
       # raise params.inspect
 
@@ -40,13 +42,15 @@ class FiguresController < ApplicationController
   end
 
   post '/figures/:id' do
+    binding.pry
     @figure = Figure.create(params[:figure])
-# binding.pry
+
     # @figure.update(params["figure"])
     if !params[:landmark][:name].empty?
-        @figure.landmarks << landmark.create(params[:landmark])
+        @figure.landmarks << Landmark.create(params[:landmark])
     end
     @figure.save
+    erb
     redirect to :"/figures/#{@figure.id}"
   end
 
