@@ -1,4 +1,5 @@
 require 'pry'
+
 class LandmarksController < ApplicationController
 
   get '/landmarks' do
@@ -13,7 +14,7 @@ class LandmarksController < ApplicationController
 
   get '/landmarks/:id' do
     @landmark = Landmark.find(params[:id])
-binding.pry
+# binding.pry
     if @landmark == nil
       erb :'/landmarks/new'
     else
