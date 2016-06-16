@@ -1,3 +1,4 @@
+require 'pry'
 class LandmarksController < ApplicationController
 
   get '/landmarks' do
@@ -10,13 +11,45 @@ class LandmarksController < ApplicationController
     erb :'/landmarks/new'
   end
 
+  get '/landmarks/:id' do
+    @landmark = Landmark.find(params[:id])
+binding.pry
+    if @landmark == nil
+      erb :'/landmarks/new'
+    else
+      erb :"/landmarks/show"
+    end
+  end
+
   post '/landmarks' do
-    @landmark = Landmark.new(params[:landmark])
-      if !params["landmark"]["figure"].empty?
-        @landmark.figure << Figure.create(name: params["figure"]["name"])
-      end
-      @landmark.save
+    binding.pry
+    @landmark = Landmark.create(params[:landmark]) #(:name => params[:name], :figure_id => params[:figure_id], :year_completed => params[:year_completed])
+  # raise params.inspect
+# binding.pry
+#       if !params["figure"]["name"].empty?
+#         @landmark.figure << Figure.create(name: params["figure"]["name"])
+#       end
+#       @landmark.save
 
     redirect "/landmarks/#{@landmark.id}"
+  end
+
+
+
+  post '/landmarks/:id' do
+    @landmark = Landmark.find(params[:id])
+# binding.pry
+    @landmark.update(params[:landmark])
+  #   if !params["figure"]["name"].empty?
+  #       @landmark.figure << Figure.create(name: params["figure"]["name"])
+  #   end
+  # @landmark.save
+
+    redirect "/landmarks/#{@landmark.id}"
+  end
+
+  get '/landmarks/:id/edit' do
+    @landmark = Landmark.find(params[:id])
+    erb :'/landmarks/edit'
   end
 end
