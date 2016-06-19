@@ -6,6 +6,10 @@
   <tr>
     <td><%= @landmark.name %></td>
     <td><%= @landmark.year_completed %></td>
-      <%= params.inspect %>
+      <!-- raise params.inspect -->
   </tr>
 <table>
+
+  <form action="/landmarks/<%= @landmark.id %>/edit">
+    <input type="submit" value="Edit">
+  </form>

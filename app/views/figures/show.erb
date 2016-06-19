@@ -1,10 +1,8 @@
-<table>
-  <tr>
-    <th>Figures</th>
+<h1>Name: <%= @figure.name %></h1>
 
-  </tr>
-  <tr>
-    <td><%= @figure.name %></td>
-    <td><%= @landmark.year_completed %></td>
-  </tr>
-<table>
+<h2>Title: <%= @figure.titles.collect(&:name).join%></h2>
+<h3>Landmarks: <%= @figure.landmarks.collect(&:name).join(", ") %></h3>
+
+<form action="/figures/<%= @figure.id %>/edit">
+  <input type="submit" value="Edit">
+</form>
