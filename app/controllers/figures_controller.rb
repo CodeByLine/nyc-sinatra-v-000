@@ -24,11 +24,12 @@ class FiguresController < ApplicationController
 
   get '/figures/:id' do
     @figure = Figure.find(params[:id])
-    if @figure != nil
+    # @figure = Figure.find(params[:id])
+    # if @figure != nil
       erb :"/figures/show"
-    else
-      erb :'/figures/new'
-    end
+    # else
+    #   erb :'/figures/new'
+    # end
   end
 
   # post '/figures/:id' do
@@ -53,13 +54,14 @@ class FiguresController < ApplicationController
 
   patch '/figures/:id' do
       @figure = Figure.find(params[:id])
-      @figure.update(params[:figure][:name])
+      @figure.update(:name => params[:figure][:name])
+      # :name=> allows update single figure
       if !params[:landmark][:name].empty?
           @figure.landmarks << Landmark.create(params[:landmark])
       end
 
-      if !params[:figure][:title].empty?
-          @figure.titles << Title.create(params[:title])
+      if !params[:title][:name].empty?
+          @figure.titles << Title.create(params[:title][:name])
       end
       @figure.save
       redirect to :"/figures/#{@figure.id}"

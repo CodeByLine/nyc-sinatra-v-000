@@ -1,4 +1,4 @@
-<h1>Name: <%= @figure.name %></h1>
+<h1><%= @figure.name %></h1>
 
 <h2>Title: <%= @figure.titles.collect(&:name).join%></h2>
 <h3>Landmarks: <%= @figure.landmarks.collect(&:name).join(", ") %></h3>
