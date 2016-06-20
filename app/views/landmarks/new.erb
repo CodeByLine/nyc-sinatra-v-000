@@ -2,13 +2,13 @@
 
 <form action="/landmarks" method = "post">
   <label>Landmark Name:</label>
-  <input type="text" name="landmark" id="landmark"> <br>
+  <input type="text" name="landmark[name]" id="landmark_name"> <br>
 
-  <label>Landmark Figure:</label>
-  <input type="text" name="figure" id="figure"> <br>
+  <!-- <label>Landmark Figure:</label>
+  <input type="text" name="figure[name]" id="figureid"> <br> -->
 
   <label>Year Completed:</label>
-  <input type="text" name="year_completed" id="year_completed"> <br>
+  <input type="text" name="landmark[year_completed]" id="landmark_year_completed"> <br>
 
-  <input type="submit" value="Add Landmark">
+  <input type="submit" value="Create New Landmark">
 </form>

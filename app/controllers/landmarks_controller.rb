@@ -23,36 +23,32 @@ class LandmarksController < ApplicationController
   end
 
   post '/landmarks' do
-    # binding.pry
-    # raise params.inspect
-    # params.to_s  => {"landmark"=>"NY", "figure"=>"Some Politician", "year_completed"=>"2016"}
-
     @landmark = Landmark.find_or_create_by(params[:landmark])
     redirect "/landmarks/#{@landmark.id}"
   end
-    # @landmark = Landmark.create(params[:landmark]) #(:name => params[:name], :figure_id => params[:figure_id], :year_completed => params[:year_completed])
 
-# binding.pry
-#       if !params["figure"]["name"].empty?
-#         @landmark.figure << Figure.create(name: params["figure"]["name"])
-#       end
-#       @landmark.save
-
-
-  post '/landmarks/:id' do
-    @landmark = Landmark.find(params[:id])
-# binding.pry
-    @landmark.update(params[:landmark])
-  #   if !params["figure"]["name"].empty?
-  #       @landmark.figure << Figure.create(name: params["figure"]["name"])
-  #   end
-  # @landmark.save
-
-    redirect "/landmarks/#{@landmark.id}"
-  end
 
   get '/landmarks/:id/edit' do
     @landmark = Landmark.find(params[:id])
     erb :'/landmarks/edit'
+  end
+
+
+  # post '/landmarks/:id' do
+  #     @landmark = Landmark.find(params[:id])
+  #     @landmark.update(params[:landmark])
+  #     redirect "/landmarks/#{@landmark.id}"
+  # end
+
+  patch '/landmarks/:id' do
+      @landmark = Landmark.find(params[:id])
+  # binding.pry
+      @landmark.update(params[:landmark])
+    #   if !params["figure"]["name"].empty?
+    #       @landmark.figure << Figure.create(name: params["figure"]["name"])
+    #   end
+    # @landmark.save
+
+      redirect "/landmarks/#{@landmark.id}"
   end
 end
